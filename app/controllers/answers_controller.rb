@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  include ActionView::RecordIdentifier 
+
   before_action :set_question!
   before_action :set_answer!, except: %i[create]
 
@@ -7,7 +9,7 @@ class AnswersController < ApplicationController
 
     if @answer.save
       flash[:success] = 'Answer created successfully'
-      redirect_to question_path(@question, anchor: "answer-#{@answer.id}")
+      redirect_to question_path(@question, anchor: dom_id(@answer))
     else
       @answers = @question.answers.order(created_at: :desc).page(params[:page]).per(5)
       render 'questions/show'
