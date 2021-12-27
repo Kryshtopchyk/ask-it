@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
-  include ActionView::RecordIdentifier 
+  include ActionView::RecordIdentifier
 
   before_action :set_question!
   before_action :set_answer!, except: %i[create]
